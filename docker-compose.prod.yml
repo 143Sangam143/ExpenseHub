@@ -1,0 +1,26 @@
+services:
+  postgres:
+    ports: []
+    restart: always
+
+  backend:
+    build:
+      target: production
+    volumes:
+      - ./.docker/backend/php.prod.ini:/usr/local/etc/php/conf.d/99-custom.ini:ro
+      - ./.docker/backend/entrypoint.sh:/usr/local/bin/entrypoint.sh:ro
+    restart: always
+
+  nginx:
+    restart: always
+    # NOTE: still bind-mounts ./backend to serve public/ static files (storage symlink,
+    # robots.txt, etc). This is a deliberate simplification for single-host deploys.
+    # A fully immutable setup would populate a shared named volume from the backend
+    # image at container start instead — worth revisiting if you move to multi-host/
+    # orchestrated deployment later.
+
+  web:
+    build:
+      target: production
+    volumes: []
+    restart: always
