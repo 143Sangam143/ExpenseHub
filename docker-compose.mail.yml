@@ -1,0 +1,15 @@
+services:
+  mail:
+    image: mailhog/mailhog:v1.0.1
+    container_name: ${COMPOSE_PROJECT_NAME}_mail
+    restart: unless-stopped
+    ports:
+      - "1025:1025"   # SMTP — backend sends here
+      - "8025:8025"   # Web UI — view caught emails here
+    networks:
+      - expensehub
+
+networks:
+  expensehub:
+    external: true
+    name: ${COMPOSE_PROJECT_NAME}_expensehub

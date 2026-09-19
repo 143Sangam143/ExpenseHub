@@ -61,5 +61,11 @@ shell-backend:
 shell-web:
 	$(COMPOSE_DEV) exec web sh
 
+mail:
+	docker compose -f docker-compose.yml -f docker-compose.mail.yml up -d
+
+mail-down:
+	docker compose -f docker-compose.mail.yml down
+
 %:
 	@:
