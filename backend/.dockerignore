@@ -3,6 +3,7 @@
 .env
 .env.*
 !.env.example
+.config/
 node_modules
 vendor
 storage/logs
