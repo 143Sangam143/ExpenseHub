@@ -30,9 +30,12 @@ services:
       - ./backend/.env
     volumes:
       - ./backend:/var/www/html
+      - composer_cache:/tmp/composer
       - ./.docker/backend/php.ini:/usr/local/etc/php/conf.d/99-custom.ini:ro
       - ./.docker/backend/xdebug.ini:/usr/local/etc/php/conf.d/50-xdebug.ini:ro
       - ./.docker/backend/entrypoint.sh:/usr/local/bin/entrypoint.sh:ro
+    environment:
+      COMPOSER_CACHE_DIR: /tmp/composer
     depends_on:
       postgres:
         condition: service_healthy
@@ -84,3 +87,4 @@ volumes:
   postgres_data:
   web_node_modules:
   web_next:
+  composer_cache:
