@@ -14,7 +14,7 @@ For project goals, architecture, and development principles, see [`docs/INTRODUC
 ### 1. Clone and enter the repo
 ```bash
 git clone https://github.com/143Sangam143/ExpenseHub.git
-cd expensehub
+cd ExpenseHub
 ```
 
 ### 2. Copy environment files
@@ -27,13 +27,16 @@ cp web/.env.example web/.env.local
 ### 3. Generate local HTTPS certificates
 One-time, or whenever your LAN IP changes:
 ```bash
-chmod +x .docker/certs/generate-certs.sh
+# One-time: already applied and committed to the repo — re-run only if you recreate this script locally
+chmod +x .docker/certs/generate-certs.sh  ## it is kept only for note
+
 make certs # to make the ssl certificates
+
 ## Use below if you want to make it so that the ssl certificate works for whole netowrk i.e laptop, mobile.
 make certs LAN_IP=192.168.1.23   # your machine's LAN IP,
 ```
 
-*(Optional)* Import `.docker/certs/generated/ca.crt` into your OS/browser trust store to remove the browser's self-signed-certificate warning. Skip this and click "Proceed anyway" if you'd rather not bother.
+*(Optional)* Import `.docker/certs/generated/ca.crt` into your OS/browser trust store to remove the browser's self-signed-certificate warning. This step is optional; if skipped, your browser will show a self-signed-certificate warning that you can safely dismiss.
 
 ### 4. Build and start everything
 ```bash
@@ -84,7 +87,7 @@ All four containers should show as running/healthy.
 ```bash
 make docker-production
 ```
-The same stack, built from the optimized production Dockerfile targets — use this to verify the deploy-ready build works correctly before it ever goes near a real server.
+The same stack, built from the optimized production Dockerfile targets. Use this to validate the production build locally before deploying to a real server.
 
 ## Email testing (Mailhog)
 
@@ -99,4 +102,4 @@ View caught emails at http://localhost:8025 — nothing is ever sent to a real i
 
 Further documentation lives in [`docs/`](docs/):
 
-- [`docs/introduction.md`](docs/introduction.md) — project goals, architecture, and development principles
+- [`docs/INTRODUCTION.md`](docs/INTRODUCTION.md) — project goals, architecture, and development principles
